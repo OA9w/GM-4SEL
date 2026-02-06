@@ -35,16 +35,17 @@ abstract public class BasePage {
         return driver.findElement(locator).isDisplayed();
     }
 
-    protected WebElement waitClick(By locator) {
+    protected WebElement waitUntilClickable(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
     protected void click(By locator) {
-        WebElement element = waitClick(locator);
+        WebElement element = waitUntilClickable(locator);
         element.click();;
     }
 
     protected void type(By locator, String text) {
-        WebElement element = waitClick(locator);
+        WebElement element = waitUntilClickable(locator);
         element.click();
         element.clear();
         element.sendKeys(text);

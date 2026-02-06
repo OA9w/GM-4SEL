@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Feature("Order completion")
 public class CheckoutCompleteTest extends BaseTest{
     @Test
-    @Story("Checkout")
-    @Description("Checkout with missing first name")
+    @Story("Complete order life")
+    @Description("Order completion, from login to final message")
     @Severity(SeverityLevel.CRITICAL)
     public void testCompleteOrderFlow(){
         LoginPage loginPage = new LoginPage(driver);
@@ -27,7 +27,6 @@ public class CheckoutCompleteTest extends BaseTest{
         CheckoutOverviewPage checkoutOverviewPage = checkoutPage.clickContinue();
 
         CheckoutCompletePage checkoutCompletePage = checkoutOverviewPage.clickFinish();
-
         assertTrue(checkoutCompletePage.getConfirmationMessage().contains("Thank you"),
                 "Le message ne contient pas 'Thank you'. : " + checkoutCompletePage.getConfirmationMessage());
     }

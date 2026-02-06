@@ -11,6 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 abstract public class BaseTest {
 
     protected WebDriver driver;
@@ -19,7 +22,14 @@ abstract public class BaseTest {
     protected void setUp() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        boolean isCi = "true".equalsIgnoreCase(System.getenv("CI"));
+
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+        prefs.put("profile.password_manager_leak_detection", false);
+
+        options.setExperimentalOption("prefs", prefs);
+
         String headless = System.getenv("HEADLESS");
         if ("true".equalsIgnoreCase(headless)) {
             options.addArguments("--headless=new");
@@ -28,6 +38,7 @@ abstract public class BaseTest {
             options.addArguments("--disable-gpu");
             options.addArguments("--window-size=1920,1080");
         }
+
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }

@@ -11,6 +11,8 @@ public class LoginPage extends BasePage{
     private final By loginInput = By.cssSelector("input[placeholder='Username']");
     private final By passwordInput = By.cssSelector("input[placeholder='Password']");
     private final By buttonLoginInput = By.cssSelector("input[id='login-button']");
+    private final By errorMessageContent = By.cssSelector("h3[data-test='error']");
+    private final By errorMessage = By.cssSelector("div[class='error-message-container error']");
 
 
     public LoginPage open() {
@@ -21,16 +23,16 @@ public class LoginPage extends BasePage{
     public InventoryPage login(String username, String password) {
         open();
         type(loginInput,username);
-        type(passwordInput,username);
+        type(passwordInput,password);
         click(buttonLoginInput);
         return new InventoryPage(this.driver);
     }
 
     public String getErrorMessage() {
-        return ;
+        return getText(errorMessageContent);
     }
 
     public Boolean isErrorDisplayed() {
-        return ;
+        return isDisplayed(errorMessage);
     }
 }

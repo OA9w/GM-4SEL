@@ -8,7 +8,7 @@ public class CheckoutCompletePage extends BasePage{
         super(driver);
     }
 
-    private final By orderCompleteTitle = By.cssSelector("div[data-test='complete-header']");
+    private final By orderCompleteTitle = By.cssSelector("h2[data-test='complete-header']");
     public boolean isDisplayed() {
         return getCurrentUrl().equals("https://www.saucedemo.com/checkout-complete.html");
     }
